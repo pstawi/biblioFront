@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
        async function loadType() {
          try {
             const urlGetType = await fetch("http://localhost:3000/api/type");
-            console.log("urlGetType", urlGetType);
+            // console.log("urlGetType", urlGetType);
             
             const data = await urlGetType.json();
 
@@ -60,4 +60,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const form = document.getElementById('formType');
+
+    form.addEventListener('submit',  function(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+    addType();
+});
+
+    async function addType() {
+
+        const newType = {
+
+         libelle:form.libelle.value,
+
+        };
+
+        console.log(newType);
+
+        try {
+
+            const urlAddType = await fetch("http://localhost:3000/api/addType", {
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newType)
+
+                
+               });
+               
+               console.log(urlAddType)
+            const data = await urlAddType.json();
+
+            console.log("add Type", data);
+            
+            location.reload()
+
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout du Type:', error);
+            
+        }
+        
+    }
 });
