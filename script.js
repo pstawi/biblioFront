@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlGetClients = await fetch("http://localhost:3000/api/client");
             console.log("urlGetClients", urlGetClients);
             
-             const data = await urlGetClients.json();
+            const data = await urlGetClients.json();
 
             //  console.log(data);
             const clientList = document.getElementById('clientList');
