@@ -12,11 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const tableauClient = document.getElementById("tableauClient");
 
             data.clients.forEach(key => {
+               
                 const li = document.createElement('li');
+
                 li.innerHTML = `${key.id} ${key.prenom} ${key.nom} 
                 <button class="btn btn-danger" onclick="deleteClient(${key.id})">Supprimer</button>
                 <button class="btn btn-primary" onclick="updateClient(${key.id})">Modifier</button>`;
-                clientList.appendChild(li);
+
+                tableauClient.appendChild(li);
 
                 
                //  console.log(key.prenom);

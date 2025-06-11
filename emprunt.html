@@ -27,15 +27,94 @@
           <a class="nav-link" href="./type.html">Type</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./emprunt.html">Emprunt</a>
+          <a class="nav-link" href="./document.html">Document</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="./emprunt.html">Emprunt</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<table class="table">
+  
+  <thead>
+
+    <tr>
+
+      <th scope="col">nom</th>
+      <th scope="col">prenom</th>
+      <th scope="col">Type</th>
+      <th scope="col">Date Emprunt</th>
+      <th scope="col">Date Retour</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody id="tableauEmprunt">
+
+  </tbody>
+  
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="formEmprunt">
+  <div class="form-group">
+    <label>Nom</label>
+    <input type="text" class="form-control" id="nom" placeholder="Nom">
+  </div>
+  <div class="form-group">
+    <label>Prenom</label>
+    <input type="text" class="form-control" id="prenom" placeholder="prenom">
+  </div>
+  <div class="form-group">
+    <label>Type</label>
+    <input type="date" class="form-control" id="libelle" placeholder="libelle">
+  </div>
+  <div class="form-group">
+    <label>Date Emprunt</label>
+    <input type="date" class="form-control" id="dateEmprunt" placeholder="dateEmprunt">
+  </div>
+  <div class="form-group">
+    <label>Date Retour</label>
+    <input type="date" class="form-control" id="dateRetour" placeholder="dateRetour">
+  </div>
+
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" >Client</label>
+  </div>
+  <select class="custom-select" id="selectClient">
+  </select>
+</div>
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" >Type</label>
+  </div>
+  <select class="custom-select" id="selectType">
+  </select>
+</div>
+  <button type="submit" class="btn btn-primary">valider</button>
+</form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</div>
+
+  <script src="emprunt.js"></script>
 
 </body>
 </html>
