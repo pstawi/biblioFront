@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tableauClient = document.getElementById("tableauClient");
 
             data.clients.forEach(key => {
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${key.id}</td>
                 <td>${key.prenom}</td>
