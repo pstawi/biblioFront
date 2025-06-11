@@ -77,5 +77,32 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erreur lors de la suppression du type:", error);
       }
     }
+
+  window.updateType = async function(idType) {
+
+    const libelle = prompt("nouveau type ?");
+
+    console.log(JSON.stringify({libelle}))
+
+    try {
+
+      await fetch("http://localhost:3000/api/updateType/" + idType,{
+        method: "PUT",
+        headers: {
+                  'Content-Type': 'application/json'
+               },
+        body: JSON.stringify({libelle}),
+              }              
+      );
+
+      location.reload();
+      
+    } catch (error) {
+      console.error(error);
+      
+    }
+
+  }
+    
   };
 });
