@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(newClient);
 try{
-const urlAddClient = await fetch("https://localhost:3000/api/ajoutClient",
+const urlAddClient = await fetch("https://localhost:3000/api/postClient",
 {method:"POST",
  body: JSON.stringify(newClient)
     
