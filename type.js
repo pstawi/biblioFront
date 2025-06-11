@@ -57,30 +57,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  window.deleteType = async function(idType) {
+  window.deleteType = async function (idType) {
+    // Confirmation de la suppression
+    let confirmation = confirm(`Êtes-vous sûr de vouloir supprimer ce type ?`);
+    if (confirmation == true) {
+      try {
+        // requete selection type par id
+        // requete  de suppression du type
+        await fetch("http://localhost:3000/api/deleteType/" + idType, {
+          method: "DELETE",
+          header: {
+            "Content-Type": "application/json",
+          },
+        });
+        alert("Type supprimé avec succès");
 
-      // Confirmation de la suppression
-      let confirmation = confirm(`Êtes-vous sûr de vouloir supprimer ce type ?`);
-      if(confirmation == true){
-
-         try {
-            // requete selection type par id
-            // requete  de suppression du type
-            await fetch("http://localhost:3000/api/deleteType/" + idType,{
-               method: "DELETE",
-               header: {
-                  'Content-Type': 'application/json'
-               }
-            });
-            alert("Type supprimé avec succès");
-
-           location.reload(); // Recharge la page pour mettre à jour la liste des clients
-            
-         } catch (error) {
-            console.error('Erreur lors de la suppression du type:', error);
-            
-         }
+        location.reload(); // Recharge la page pour mettre à jour la liste des clients
+      } catch (error) {
+        console.error("Erreur lors de la suppression du type:", error);
       }
-      
     }
+  };
 });

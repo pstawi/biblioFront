@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
          location.reload(); // Recharge la page pour mettre à jour la liste des clients
          
       } catch (error) {
-         
+      
       }
     }
 
