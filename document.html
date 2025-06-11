@@ -32,6 +32,52 @@
     </div>
   </div>
 </nav>
+<div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Ajouter un document
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="formDocument">
+  <div class="form-group">
+    <label>Titre</label>
+    <input type="text" class="form-control" id="titre" placeholder="titre">
+  </div>
+  <div class="form-group">
+    <label>Résumé</label>
+    <input type="text" class="form-control" id="resume" placeholder="resume">
+  </div>
+  <div class="form-group">
+    <label>Date de sortie</label>
+    <input type="date" class="form-control" id="date" placeholder="date">
+  </div>
+
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" >Type</label>
+  </div>
+  <select class="custom-select" id="selectType">
+  </select>
+</div>
+  <button type="submit" class="btn btn-primary">valider</button>
+</form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</div>
 
 <div id="tableauDoc">
     <table class="table table-hover">
@@ -50,5 +96,6 @@
 </div>
 
 <script src="document.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
