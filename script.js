@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.clients.forEach(key => {
                 const li = document.createElement('li');
                 li.innerHTML = `${key.id} ${key.prenom} ${key.nom} 
-                <button class="btn btn-danger" onclick="deleteClient(${key.id})">Supprimer</button>
+                <a onclick="deleteClient(${key.id})">🗑️</a>
                 <button class="btn btn-primary" onclick="updateClient(${key.id})">Modifier</button>`;
                 clientList.appendChild(li);
                //  console.log(key.prenom);
