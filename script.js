@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="btn btn-danger" onclick="deleteClient(${key.id})">Supprimer</button>
                 <button class="btn btn-primary" onclick="updateClient(${key.id})">Modifier</button>`;
                 clientList.appendChild(li);
-
-                
                //  console.log(key.prenom);
             });
 
