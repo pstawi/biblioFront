@@ -6,20 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlGetClients = await fetch("http://localhost:3000/api/client");
             console.log("urlGetClients", urlGetClients);
             
-            const data = await urlGetClients.json();
+             const data = await urlGetClients.json();
 
             //  console.log(data);
             const tableauClient = document.getElementById("tableauClient");
 
             data.clients.forEach(key => {
-               
-                const li = document.createElement('li');
 
-                li.innerHTML = `${key.id} ${key.prenom} ${key.nom} 
-                <button class="btn btn-danger" onclick="deleteClient(${key.id})">Supprimer</button>
-                <button class="btn btn-primary" onclick="updateClient(${key.id})">Modifier</button>`;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${key.id}</td>
+                <td>${key.prenom}</td>
+                <td>${key.nom}</td>
+                <td>${key.mail}</td> 
+                <td><a style="cursor: pointer;" onclick="deleteClient(${key.id})">🗑️​</onclick=> </a></td>
+                <td><a style="cursor: pointer;" onclick="updateClient(${key.id})">🖊️​</a></td>`;
 
-                tableauClient.appendChild(li);
+                
+                tableauClient.appendChild(tr);
 
                 
                //  console.log(key.prenom);
