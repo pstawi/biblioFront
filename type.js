@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
       data.forEach((key) => {
         const li = document.createElement("li");
         li.innerHTML = `${key.idType} ${key.libelle} 
-                <button class="btn btn-danger" onclick="deleteType(${key.idType})">Supprimer</button>
-                <button class="btn btn-primary" onclick="updateType(${key.idType})">Modifier</button>`;
+          <button class="btn btn-danger" onclick="deleteType(${key.idType})">Supprimer</button>
+          <button class="btn btn-primary" onclick="updateType(${key.idType})">Modifier</button>`;
         typeList.appendChild(li);
 
         //  console.log(key.prenom);
@@ -78,31 +78,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-  window.updateType = async function(idType) {
+    window.updateType = async function (idType) {
+      const libelle = prompt("nouveau type ?");
 
-    const libelle = prompt("nouveau type ?");
+      console.log(JSON.stringify({ libelle }));
 
-    console.log(JSON.stringify({libelle}))
+      try {
+        await fetch("http://localhost:3000/api/updateType/" + idType, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ libelle }),
+        });
 
-    try {
-
-      await fetch("http://localhost:3000/api/updateType/" + idType,{
-        method: "PUT",
-        headers: {
-                  'Content-Type': 'application/json'
-               },
-        body: JSON.stringify({libelle}),
-              }              
-      );
-
-      location.reload();
-      
-    } catch (error) {
-      console.error(error);
-      
-    }
-
-  }
-    
+        location.reload();
+      } catch (error) {
+        console.error(error);
+      }
+    };
   };
 });
