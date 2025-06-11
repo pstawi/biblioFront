@@ -9,14 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
              const data = await urlGetClients.json();
 
             //  console.log(data);
-            const clientList = document.getElementById('clientList');
+            const tableauClient = document.getElementById("tableauClient");
 
             data.clients.forEach(key => {
-                const li = document.createElement('li');
-                li.innerHTML = `${key.id} ${key.prenom} ${key.nom} 
-                <button class="btn btn-danger" onclick="deleteClient(${key.id})">Supprimer</button>
-                <button class="btn btn-primary" onclick="updateClient(${key.id})">Modifier</button>`;
-                clientList.appendChild(li);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${key.id}</td>
+                <td>${key.prenom}</td>
+                <td>${key.nom}</td>
+                <td>${key.mail}</td> 
+                <td><a style="cursor: pointer;" onclick="deleteClient(${key.id})">🗑️​</onclick=> </a></td>
+                <td><a style="cursor: pointer;" onclick="updateClient(${key.id})">🖊️​</a></td>`;
+
+                
+                tableauClient.appendChild(tr);
 
                 
                //  console.log(key.prenom);
@@ -32,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadClients(); // Appel initial pour charger les clients
+
+    
     
 
     window.deleteClient = async function(idClient) {
