@@ -13,10 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             data.forEach(key => {
 
-                const li = document.createElement('li');
-                li.innerHTML = `${key.idType} ${key.libelle} 
-                <button class="btn btn-primary" onclick="updateType(${key.idType})">Modifier</button>`;
-                typeList.appendChild(li);
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                <td>${key.idType}</td>
+                <td>${key.libelle}</td>
+                <td><a style="cursor: pointer;" onclick="updateType(${key.idType})">✏️</a></td>`;
+
+                typeList.appendChild(tr);
  
                //  console.log(key.libelle);
 
@@ -82,11 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlAddType = await fetch("http://localhost:3000/api/addType", {
                 method:"POST",
                 headers: {
-                    'Content-Type': 'application/json'
+
+                  'Content-Type': 'application/json'
                 },
+
                 body: JSON.stringify(newType)
 
-                
                });
                
                console.log(urlAddType)
