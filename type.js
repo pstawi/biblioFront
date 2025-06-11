@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const typeList = document.getElementById("typeList");
 
       data.forEach((key) => {
-        const li = document.createElement("li");
-        li.innerHTML = `${key.idType} ${key.libelle} 
+        const li = document.createElement("li"); 
+       li.innerHTML = `${key.idType} ${key.libelle} 
           <button class="btn btn-danger" onclick="deleteType(${key.idType})">Supprimer</button>
           <button class="btn btn-primary" onclick="updateType(${key.idType})">Modifier</button>`;
         typeList.appendChild(li);
