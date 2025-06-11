@@ -1,101 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-    <title>BiblioForeach</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">bibliFront</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="client.html">Client</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./type.html">Type</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="document.html">Documents</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Ajouter un document
-</button>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const form = document.getElementById('formDocument');
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
 
-        <form id="formDocument">
-  <div class="form-group">
-    <label>Titre</label>
-    <input type="text" class="form-control" id="titre" placeholder="titre">
-  </div>
-  <div class="form-group">
-    <label>Résumé</label>
-    <input type="text" class="form-control" id="resume" placeholder="resume">
-  </div>
-  <div class="form-group">
-    <label>Date de sortie</label>
-    <input type="date" class="form-control" id="date" placeholder="date">
-  </div>
+    // fonction tableau document
+    async function loadDocuments(){
+        try {
+            const urlGetDocuments = await fetch("http://localhost:3000/api/documents");
+            const data = await urlGetDocuments.json();
+            const documentList = document.getElementById('documentList');
+            console.log("Documents chargés:", data);
 
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <label class="input-group-text" >Type</label>
-  </div>
-  <select class="custom-select" id="selectType">
-  </select>
-</div>
-  <button type="submit" class="btn btn-primary">valider</button>
-</form>
-      </div>
-     
-    </div>
-  </div>
-</div>
-</div>
+            data.documents.forEach(element => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                <td>${element.titre}</td>
+                <td>${element.resume}</td>
+                <td>${element.libelle}</td>
+                <td>${element.annee}</td>
+                <td>${element.dispo ? 'dispo' : 'indisponible'}</td>
+                `;
 
-<div id="tableauDoc">
-    <table class="table table-hover">
-        <thead>
-    <tr>
-      <th scope="col">Titre</th>
-      <th scope="col">Résumé</th>
-      <th scope="col">Type</th>
-      <th scope="col">Année</th>
-      <th scope="col">Dispo</th>
-    </tr>
-  </thead>
-  <tbody id="documentList">
-    <!-- Les lignes de la table seront insérées ici par JavaScript -->
-     </tbody>
-</div>
+                documentList.appendChild(tr);
+                
+            });
 
-<script src="document.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        } catch (error) {
+            console.error('Erreur de chargement des documents:', error);
+            
+        }
+    }
+
+    // fonction remplissage select type modal
+    async function loadType() {
+    try {
+      const urlGetType = await fetch("http://localhost:3000/api/type");
+      console.log("urlGetType", urlGetType);
+
+      const data = await urlGetType.json();
+
+      //  console.log(data);
+      const typeList = document.getElementById("selectType");
+
+      data.forEach((key) => {
+        const option = document.createElement("option");
+        option.textContent = key.libelle;
+        option.value = key.idType
+        typeList.appendChild(option);
+
+        //  console.log(key.prenom);
+      });
+
+      // console.log(data.clients);
+    } catch (error) {
+      console.error("erreur de chargement des types:", error);
+    }
+  }
+
+  form.addEventListener('submit', async function(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+    await addDocument();
+});
+
+  async function addDocument(){
+    const titre = document.getElementById('titre').value;
+    const resume = document.getElementById('resume').value;
+    const date = document.getElementById('date').value;
+    const idType = document.getElementById('selectType').value;
+
+    console.log(titre, resume, date, idType);
+
+    try {
+
+        const urlAddDocument = await fetch('http://localhost:3000/api/addDocument', {
+            method: 'POST',
+            headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({titre, resume, date, idType})
+        });
+
+        loadDocuments();
+        
+    } catch (error) {
+        console.error(error);
+        
+        
+    }
+  }
+    loadDocuments(); // Appel initial pour charger les documents
+    loadType();
+});
